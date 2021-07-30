@@ -1,7 +1,6 @@
-
-
 <div class="main-container">
   <app-header [sidenav]="sidenav"></app-header>
+
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #sidenav class="w-10p">
       <mat-list>
@@ -9,23 +8,26 @@
         <mat-list-item (click)="sidenav.toggle()">
         <mat-icon>home</mat-icon>
         <span class="marginLeft-Home"></span>
-          <a href="/">Home</a>
+          <a [routerLink]="['/']">Home</a>
         </mat-list-item>
 
-        <mat-list-item>
+        <mat-divider></mat-divider>
+
+        <mat-list-item (click)="sidenav.toggle()">
           <mat-icon>category</mat-icon>
           <span class="marginLeft-Home"></span>
-            <a href="/">Category</a>
+            <a [routerLink]="['/category']">Category</a>
           </mat-list-item>
 
       </mat-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
-
       <router-outlet></router-outlet>
     </mat-sidenav-content>
+
   </mat-sidenav-container>
+
   <app-footer></app-footer>
 </div>
 
