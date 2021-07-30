@@ -1,0 +1,21 @@
+.main-container{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.sidenav-container{
+  flex: 1;
+}
+a{
+  color: white;
+  text-decoration: none;
+}
+
+a:hover{
+  font-size: 18px;
+}
+
