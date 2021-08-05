@@ -18,6 +18,11 @@
           <span class="marginLeft-Home"></span>
             <a [routerLink]="['/category']">Category</a>
           </mat-list-item>
+          <mat-list-item (click)="sidenav.toggle()">
+            <mat-icon>check</mat-icon>
+            <span class="marginLeft-Home"></span>
+              <a [routerLink]="['/checklist']">Checklist</a>
+            </mat-list-item>
 
       </mat-list>
     </mat-sidenav>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { CategoryEditComponent } from '../category-edit/category-edit.component';
+import { DialogComponent } from '../dialog/dialog.component';
 import { Category } from '../Models/Category';
 
 export const CATEGORY_DATE = [
@@ -16,21 +19,39 @@ export const CATEGORY_DATE = [
 export class CategoryComponent implements OnInit {
   public displayedColumns: string[] = ['id', 'name', 'actions'];
   public dataSource: Category[] = CATEGORY_DATE;
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
-   public EditCategory(category: Category)
+   public EditCategory(InputCategory: Category)
    {
-    console.log("Edit new Category clicked");
+    this.dialog.open(CategoryEditComponent, {disableClose: true,
+      data: {editableCategory: InputCategory  }}).afterClosed().subscribe(
+      resp => {
+        console.log("modal edit Closed");
+      }
+    )
    }
    public DeleteCategory(category: Category)
    {
-    console.log("Delete new Category clicked");
+    this.dialog.open(DialogComponent, {disableClose: true,
+      data: {DialogMsg: "Are you sure you want to delete this category?", LeftButtonLabel: "No",RightButtonLabel: "Yes"  }}).afterClosed().subscribe(
+      resp => {
+        if(resp)
+        console.log("Category deleted");
+        else
+        console.log("Category wasn't delete !");
+      }
+    )
    }
    public CreateNewCategory()
    {
-    console.log("Create new Category clicked");
+    this.dialog.open(CategoryEditComponent, {disableClose: true,
+      data: {actionName: "Create Category"  }}).afterClosed().subscribe(
+      resp => {
+        console.log("modal create Closed");
+      }
+    )
 
    }
 }

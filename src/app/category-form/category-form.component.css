@@ -1,0 +1,7 @@
+.color-white{
+  color: white;
+}
+.flex-center{
+  display: flex;
+  justify-content: center;
+}
