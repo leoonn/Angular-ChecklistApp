@@ -3,13 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { CategoryEditComponent } from '../category-edit/category-edit.component';
 import { DialogComponent } from '../dialog/dialog.component';
 import { Category } from '../Models/Category';
-
-export const CATEGORY_DATE = [
-{name: 'Educação', guid: 'aaa-bbb-ccc-dddd'},
-{name: 'Trabalho', guid: 'aaa-bbb-ccc-dddd'},
-{name: 'Saude', guid: 'aaa-bbb-ccc-dddd'},
-{name: 'Outros', guid: 'aaa-bbb-ccc-dddd'}
-];
+import { CategoryService } from '../services/category.service';
+import { SnackBarService } from '../services/snack-bar.service';
 
 @Component({
   selector: 'app-category',
@@ -18,17 +13,26 @@ export const CATEGORY_DATE = [
 })
 export class CategoryComponent implements OnInit {
   public displayedColumns: string[] = ['id', 'name', 'actions'];
-  public dataSource: Category[] = CATEGORY_DATE;
-  constructor(private dialog: MatDialog) { }
+  public dataSource: Category[] = [];
+  constructor(private dialog: MatDialog, private categoryservice: CategoryService, private snackbarService: SnackBarService) { }
 
   ngOnInit(): void {
+    this.categoryservice.getallcategories().subscribe(
+       (resp: Category[]) => {
+         this.dataSource = resp;
+       }
+    );
   }
+
    public EditCategory(InputCategory: Category)
    {
     this.dialog.open(CategoryEditComponent, {disableClose: true,
       data: {editableCategory: InputCategory  }}).afterClosed().subscribe(
       resp => {
-        console.log("modal edit Closed");
+        if(resp)
+        {
+        this.snackbarService.ShowSnackBar("Category Edited", 'OK')
+        }
       }
     )
    }
@@ -38,9 +42,15 @@ export class CategoryComponent implements OnInit {
       data: {DialogMsg: "Are you sure you want to delete this category?", LeftButtonLabel: "No",RightButtonLabel: "Yes"  }}).afterClosed().subscribe(
       resp => {
         if(resp)
+        {
+        this.snackbarService.ShowSnackBar('Category was deleted with success', 'OK')
         console.log("Category deleted");
-        else
-        console.log("Category wasn't delete !");
+        }
+        else{
+          this.snackbarService.ShowSnackBar("Category wasn't deleted !", 'OK')
+          console.log("Category wasn't delete !");
+        }
+
       }
     )
    }
@@ -49,7 +59,11 @@ export class CategoryComponent implements OnInit {
     this.dialog.open(CategoryEditComponent, {disableClose: true,
       data: {actionName: "Create Category"  }}).afterClosed().subscribe(
       resp => {
-        console.log("modal create Closed");
+        if(resp)
+        {
+        this.snackbarService.ShowSnackBar('Category Created', 'OK')
+        }
+
       }
     )
 

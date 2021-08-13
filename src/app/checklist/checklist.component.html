@@ -16,12 +16,11 @@
   <!-- Name Column -->
   <ng-container matColumnDef="completed">
     <th mat-header-cell *matHeaderCellDef> item Complete </th>
-    <td mat-cell *matCellDef="let element">
+    <td mat-cell *matCellDef="let element" >
 
-      <mat-icon color="primary" *ngIf="element.completed" (click)="UpdateCompleteStatus(true)">thumb_up</mat-icon>
-      <mat-icon color="warn" *ngIf="!element.completed" (click)="UpdateCompleteStatus(false)">thumb_down</mat-icon>
+      <mat-icon class="margin-left-25" color="primary" *ngIf="element.completed" (click)="UpdateCompleteStatus(true)">thumb_up</mat-icon>
+      <mat-icon class="margin-left-25" color="warn" *ngIf="!element.completed" (click)="UpdateCompleteStatus(false)">thumb_down</mat-icon>
 
-      {{element.completed}}
     </td>
   </ng-container>
   <ng-container matColumnDef="description">
@@ -38,7 +37,7 @@
   </ng-container>
   <ng-container matColumnDef="category">
     <th mat-header-cell *matHeaderCellDef> Category </th>
-    <td mat-cell *matCellDef="let element"> {{element.category.name}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.category?.name}} </td>
   </ng-container>
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Actions </th>

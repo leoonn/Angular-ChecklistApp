@@ -20,6 +20,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .margin-right-10{
   margin-right: 10px ! important;
 }
+.margin-left-25{
+  margin-left: 25px ! important;
+}
 
 .flx-center-row {
   display: flex !important;
@@ -32,3 +35,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .w-300{
   width: 300px;
 }
+.w-350{
+  width: 350px;
+}
+
+
